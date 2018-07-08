@@ -1,0 +1,177 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 27, 2016 at 05:10 AM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `restaurant`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `Name` varchar(20) NOT NULL,
+  `Username` varchar(10) NOT NULL,
+  `Address` varchar(20) NOT NULL,
+  `Gender` varchar(10) NOT NULL,
+  `Contact No.` varchar(11) NOT NULL,
+  `Password` varchar(15) NOT NULL,
+  `Email` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`Name`, `Username`, `Address`, `Gender`, `Contact No.`, `Password`, `Email`) VALUES
+('Adiba', 'adiba19', 'Dhaka', 'Female', '01910010101', '1123', 'adiba@gmail.com'),
+('Faad', 'faad56', 'Chittahong', 'Male', '01810908978', '2312', 'faad@ymail.com'),
+('Fabiha', 'fabiha76', 'Dhaka', 'Female', '01678098656', '4554', 'fabiha@gmail.com'),
+('Jishan', 'jishan101', 'Dhaka', 'Male', '01853976175', '1122', 'md@gmail.com'),
+('Naim', 'naim11', 'Jessore', 'Male', '01670191923', '5434', 'naim@yahoo.com'),
+('Steve', 'steve21', 'Chittahong', 'Male', '01810010101', '1122', 'stv@yahho.com'),
+('Tausif', 'tausif34', 'Dhaka', 'Male', '01545213121', '3232', 'tausif@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee`
+--
+
+CREATE TABLE `employee` (
+  `Name` varchar(20) NOT NULL,
+  `Username` varchar(15) NOT NULL,
+  `Address` varchar(20) NOT NULL,
+  `Gender` varchar(10) NOT NULL,
+  `Contact No.` varchar(20) NOT NULL,
+  `Password` varchar(15) NOT NULL,
+  `Email` varchar(35) NOT NULL,
+  `Salary` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`Name`, `Username`, `Address`, `Gender`, `Contact No.`, `Password`, `Email`, `Salary`) VALUES
+('John', 'john21', 'Comilla', 'Male', '01810010102', '5678', 'jh@gmail.com', 10000),
+('Kate', 'kate11', 'Dhaka', 'Male', '01765434343', '5778', 'kaat@gmail.com', 16000),
+('kevin', 'kevin30', 'Dhaka', 'Male', '01910090989', '6778', 'kevin@gmail.com', 8000),
+('Kim', 'kim23', 'Chittahong', 'Male', '01654099087', '3223', 'kim@yahoo.com', 15000),
+('Lee', 'lee45', 'Dhaka', 'Female', '01710098778', '5885', 'lee@gmail.com', 15000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu`
+--
+
+CREATE TABLE `menu` (
+  `Item ID` int(5) NOT NULL,
+  `Item Name` varchar(35) NOT NULL,
+  `Price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`Item ID`, `Item Name`, `Price`) VALUES
+(101, 'Four Season Pizza', 530),
+(102, 'Mexican Pizza', 390),
+(103, 'Margherita Pizza', 450),
+(201, 'Chicken/Beef Cheese Burger', 220),
+(202, 'Cheesy Delight', 270),
+(203, 'B.B.Q Chicken/Beef Burger', 250),
+(301, 'Pasta Basta', 285),
+(302, 'Pasta Italiano', 280),
+(303, 'Spaghetti Alla Bolognese', 350),
+(401, 'Buffalo Wings(5 pc)', 220),
+(402, 'Chicken Strips(3 pc)', 170),
+(403, 'French Fries', 100),
+(404, 'Wedges', 180),
+(501, 'Pepsi', 35);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderdetails`
+--
+
+CREATE TABLE `orderdetails` (
+  `Order Number` int(11) NOT NULL,
+  `Customer Name` varchar(30) NOT NULL,
+  `Customer Address` varchar(30) NOT NULL,
+  `Customer PhoneNo.` varchar(20) NOT NULL,
+  `Ordered Item & Quantity` varchar(300) NOT NULL,
+  `Total` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderdetails`
+--
+
+INSERT INTO `orderdetails` (`Order Number`, `Customer Name`, `Customer Address`, `Customer PhoneNo.`, `Ordered Item & Quantity`, `Total`) VALUES
+(5, 'Adiba', 'Dhaka', '01910010101', '302=1;303=1;401=1', '850'),
+(6, 'Naim', 'Jessore', '01670191923', '101=1;103=1;203=1;301=1', '1515'),
+(7, 'Steve', 'Chittahong', '01810010101', '101=1;102=1;103=2;201=1', '2040');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`Username`),
+  ADD UNIQUE KEY `Email` (`Email`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`Username`);
+
+--
+-- Indexes for table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`Item ID`),
+  ADD UNIQUE KEY `Item Name` (`Item Name`);
+
+--
+-- Indexes for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  ADD PRIMARY KEY (`Order Number`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  MODIFY `Order Number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
